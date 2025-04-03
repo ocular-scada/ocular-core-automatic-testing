@@ -1,6 +1,6 @@
 import unittest
 
-from OcularSCADA.Framework.OcularPageObject import OcularPageObject
+from OcularSCADA.Framework.OcularPage import OcularPage
 from OcularSCADA.Framework.SideBarMenu import SideBarMenu
 from OcularSCADA import API
 
@@ -15,7 +15,7 @@ class TestEditModel(unittest.TestCase):
         API.rpc("ocular.asset_test.Setup.initializeTypeTable")
 
         self.driver = Tests.util.open_browser()
-        self.page_inst = OcularPageObject(self.driver, '', '')
+        self.page_inst = OcularPage(self.driver, '', '')
         self.page_inst.open_menu_item("model")
 
 		

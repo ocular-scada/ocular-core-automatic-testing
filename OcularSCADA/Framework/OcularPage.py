@@ -6,9 +6,9 @@ import time
 
 from Pages.PerspectivePageObject import PerspectivePageObject
 from OcularSCADA.Framework.SideBarMenu import SideBarMenu
+from OcularSCADA.Framework.TabMenuHorizontal import TabMenuHorizontal
 
-
-class OcularPageObject(PerspectivePageObject):
+class OcularPage(PerspectivePageObject):
 
 
     def __init__(self, driver, gateway_address, page_config_path):
@@ -18,3 +18,7 @@ class OcularPageObject(PerspectivePageObject):
     def open_menu_item(self, target):
         sideBarMenu = SideBarMenu(self.driver)
         sideBarMenu.select_menu_item_by_target(target)
+
+    def select_tab_by_label(self, label):
+        tabMenuHorizontal = TabMenuHorizontal(self.driver)
+        tabMenuHorizontal.select_tab_by_label(label)

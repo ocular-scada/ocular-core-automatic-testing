@@ -15,4 +15,4 @@ class SideBarMenu:
     def select_menu_item_by_target(self, target):
         menu_item = self.driver.find_element(By.ID, "ocular-scada__side-bar-menu__menu-item__" + target)
         menu_item.click()
-        time.sleep(5)
+        time.sleep(2)
