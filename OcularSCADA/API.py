@@ -17,6 +17,7 @@ def unit_tests(suite='all'):
 
 
 
+
 def tag_read(tagPath):
 
     encodedPath = urllib.parse.quote(tagPath)
@@ -37,6 +38,6 @@ def rpc(functionPath, args=[], kwargs={}):
                      params={'functionPath':functionPathEncoded, 'args': argsEncoded, 'kwargs': kwargsEncoded})
     
     if x.status_code == 200:
-        return True
+        return x.json()['result']
     else:
-        return False
+        return {}

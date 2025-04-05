@@ -15,7 +15,7 @@ MOVE_ICON_ID = "ocular-scada__asset-tree__move-icon"
 DELETE_ICON_ID = "ocular-scada__asset-tree__delete-icon"
 ADVANCED_ICON_ID = "ocular-scada__asset-tree__advanced-icon"
 
-
+_RESPONCE_TIME = 0.6
 
 
 class ModelEditorPage(OcularPage):
@@ -48,7 +48,7 @@ class ModelEditorPage(OcularPage):
         
         if control_icon:
             control_icon.click()
-            time.sleep(2)
+            time.sleep(_RESPONCE_TIME)
 
 
 

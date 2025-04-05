@@ -77,4 +77,5 @@ class Tree(CommonTree, BasicPerspectiveComponent):
                 wait_timeout=wait_timeout,
                 poll_freq=self.poll_freq)
             self._items_by_path[path] = item_component
+
         return item_component
