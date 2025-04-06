@@ -1,44 +1,40 @@
 import time
+from typing import Union, List, Optional, Tuple
 
 from selenium.webdriver.common.by import By # type: ignore
+from selenium.webdriver.remote.webdriver import WebDriver
+
+from Components.BasicComponent import BasicPerspectiveComponent
+from OcularSCADA.Framework.FormItem import FormItem
+
+class FormValueBased(BasicPerspectiveComponent):
+
+    _COMPONENT_ITEM_ID_PREFIX = 'form-item__'
 
 
 
-class FormValueBased:
+    def __init__(
+            self,
+            locator: Tuple[By, str],
+            driver: WebDriver,
+            parent_locator_list: Optional[List[Tuple[By, str]]] = None,
+            wait_timeout: float = 2,
+            description: Optional[str] = None,
+            poll_freq: float = 0.5):
+        super().__init__(
+            locator=locator,
+            driver=driver,
+            parent_locator_list=parent_locator_list,
+            wait_timeout=wait_timeout,
+            description=description,
+            poll_freq=poll_freq)
 
-    def __init__(self, driver):
-        self.driver = driver
 
+    def set_value(self, key, value):
 
-
-
-    def set_value(self, key, value, form_type):
+        form_item = FormItem(locator=(By.ID, self._COMPONENT_ITEM_ID_PREFIX + key.replace('.', '-')), driver=self.driver, parent_locator_list=self.locator_list)
+        form_item.set_value(value)
         
-        if form_type == "textinput":
-            self.set_value_of_textinput(key, value)
-        elif form_type == "textarea":
-            self.set_value_of_textarea(key, value)
-        elif form_type == "dropdown":
-            self.set_value_of_textarea(key, value)
-        elif form_type == "checkbox":
-            self.set_value_of_textarea(key, value)
-
-
-
-    def set_value_of_textinput(self, key, value):
-        pass
-    
-    def set_value_of_textarea(self, key, value):
-        pass
-
-    def set_value_of_dropdown(self, key, value):
-        pass
-
-    def set_value_of_checkbox(self, key, value):
-        pass
-
-
-
 
 
     def get_value(self, key, form_type):

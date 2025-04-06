@@ -1,9 +1,10 @@
 import unittest
+import time
 
 from OcularSCADA.Framework.OcularPage import OcularPage
 from OcularSCADA.Framework.SideBarMenu import SideBarMenu
 from OcularSCADA.Model.ModelEditorPage import ModelEditorPage
-from OcularSCADA import API
+import OcularSCADA.API
 
 import Tests.util
 
@@ -13,61 +14,40 @@ import Tests.util
 class TestAssetModel(unittest.TestCase):
 	
     def setUp(self):
-        API.rpc("ocular.asset_test.Setup.dropTables")
-        API.rpc("ocular.asset_test.Setup.createTables")
-        API.rpc("ocular.asset_test.Setup.initializeTypeTable")
+        OcularSCADA.API.rpc("ocular.asset_test.Setup.dropTables")
+        OcularSCADA.API.rpc("ocular.asset_test.Setup.createTables")
+        OcularSCADA.API.rpc("ocular.asset_test.Setup.initializeTypeTable")
 
         self.driver = Tests.util.open_browser()
-        self.page_inst = OcularPage(self.driver, '', '')
-        self.page_inst.open_menu_item("model")
-        self.page_inst = ModelEditorPage(self.driver, '', '')
-
+        self.model_editor = ModelEditorPage(self.driver, '', '')
+        self.model_editor.open_menu_item("model")
+        self.model_editor.clickModelEditorTab()
 		
     def tearDown(self):
-        API.rpc("ocular.asset_test.Setup.dropTables")
+        OcularSCADA.API.rpc("ocular.asset_test.Setup.dropTables")
 
-
-
-    def _add_asset(self, parent_item_path, details):
-        pass
 
 	# Test calculated path and calculated children
     def test_add_asset(self):
 
 
-        new_assets = [  ("", {'name': "SIM City", 'description': "Root description", 'type': "WaterAsset/Container/WaterSystem", 'tag_path': ""}),
-                        ("0", {'name': "Wells", 'description': "Wells description", 'type': "WaterAsset/Container/ProcessStage", 'tag_path': ""}),
-                        ("0", {'name': "Treatment", 'type': "WaterAsset/Container/ProcessStage", 'tag_path': ""}),
-                        ("0", {'name': "Distribution", 'type': "WaterAsset/Container/ProcessStage", 'tag_path': ""}),
-                        ("0/0", {'name': "Well 1", 'type': "WaterAsset/Container/Process", 'tag_path': ""}),
-                        ("0/0", {'name': "Well 2", 'type': "WaterAsset/Container/Process", 'tag_path': ""}),
-                        ("0/0/0", {'name': "Well Pump", 'type': "WaterAsset/Component/Device/Motor", 'tag_path': "Custom/Tag/Path"}),
-                        ("0/0/1", {'name': "Well Pump", 'type': "WaterAsset/Component/Device/Motor", 'tag_path': ""})
+
+        new_assets = [  ("", {'editAsset.name': "SIM City", 'editAsset.description': "Root description", 'editAsset.type': "WaterAsset/Container/WaterSystem"}),
+                        ("0", {'editAsset.name': "Wells", 'editAsset.description': "Wells description", 'editAsset.type': "WaterAsset/Container/ProcessStage"}),
+                        ("0", {'editAsset.name': "Treatment", 'editAsset.type': "WaterAsset/Container/ProcessStage"}),
+                        ("0", {'editAsset.name': "Distribution", 'editAsset.type': "WaterAsset/Container/ProcessStage"}),
+                        ("0/0", {'editAsset.name': "Well 1", 'editAsset.type': "WaterAsset/Container/Process"}),
+                        ("0/0", {'editAsset.name': "Well 2", 'editAsset.type': "WaterAsset/Container/Process"}),
+                        ("0/0/0", {'editAsset.name': "Well Pump", 'editAsset.type': "WaterAsset/Component/Device/Motor", 'editAsset.path': "Custom/Tag/Path"}),
+                        ("0/0/1", {'editAsset.name': "Well Pump", 'editAsset.type': "WaterAsset/Component/Device/Motor"})
                         ]
 
         
-        # add root asset
+        for asset in new_assets:
 
-        self.page_inst.clickAssetControlIcon("add")
-        self.assertTrue(self.page_inst.isSlideOutOpen())
+            self.model_editor.add_asset(asset[0], asset[1])
 
-        # TODO  - edit the slideout
-        #       - hit save
+            time.sleep(.5)
 
+            # todo - check if correct
 
-        #       - check asset exists in tree by parent_item_path and name
-
-
-
-        
-
-
-
-
-
-
-        # add child 1 asset
-
-
-
-        # add child 2 asset

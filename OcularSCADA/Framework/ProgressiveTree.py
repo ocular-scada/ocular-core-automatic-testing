@@ -1,9 +1,12 @@
 
 import time
+from typing import Union, List, Optional, Tuple
 
 from selenium.webdriver.common.by import By # type: ignore
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.remote.webdriver import WebDriver
 
+from Components.BasicComponent import ComponentPiece
 from Components.PerspectiveComponents.Common.Icon import CommonIcon
 from Components.PerspectiveComponents.Displays.Tree import Tree
 
@@ -15,7 +18,41 @@ class ProgressiveTree(Tree):
     def __init__(self, locator, driver):
         Tree.__init__(self, locator=locator, driver=driver)
 
+
+
+    def __init__(
+            self,
+            locator: Tuple[By, str],
+            driver: WebDriver,
+            parent_locator_list: Optional[List[Tuple[By, str]]] = None,
+            wait_timeout: float = 3,
+            description: Optional[str] = None,
+            poll_freq: float = 0.5):
+        super().__init__(
+            locator=locator,
+            driver=driver,
+            parent_locator_list=parent_locator_list,
+            wait_timeout=wait_timeout,
+            description=description,
+            poll_freq=poll_freq)
+
+
         self._expand_collapse_icons_by_path = {}
+
+
+
+
+
+    def get_item_label_by_path(self, item_path):
+
+        item_list = list(map(int, item_path.split('/')))
+
+        if len(item_list) > 1:
+            self._expand_item_by_path("", item_list[:-1])
+
+        tree_item = self._get_item_by_path(item_path)
+        tree_item_label = tree_item.find().get_attribute(name="data-label")
+        return tree_item_label
 
 
 
@@ -26,9 +63,17 @@ class ProgressiveTree(Tree):
         if len(item_list) > 1:
             self._expand_item_by_path("", item_list[:-1])
 
-        item = self._get_item_by_path(item_path)
-        item.click()
+        tree_item = self._get_item_by_path(item_path)
+
+        label = ComponentPiece(
+                locator=self._LABEL_LOCATOR,
+                driver=self.driver,
+                parent_locator_list=tree_item.locator_list,
+                poll_freq=self.poll_freq)
+
+        label.click()
         time.sleep(self._RESPONCE_TIME)
+
 
 
 
@@ -49,12 +94,14 @@ class ProgressiveTree(Tree):
 
 
 
-    def get_children(self, item_path):
-        pass
-
-
     def is_child(self, parent_item_path, name):
-        pass
+        children = self._get_children(parent_item_path)
+
+        for child in children:
+            if child.get_attribute("data-label") == name:
+                return True
+        
+        return False
 
 
 
@@ -71,7 +118,6 @@ class ProgressiveTree(Tree):
 
 
 
-
     # overridding this becuase it was buggy in the base class
     def item_exists_in_tree(self, item_path: str, item_label: str, wait_timeout: int = 2) -> bool:
 
@@ -81,6 +127,44 @@ class ProgressiveTree(Tree):
         except TimeoutException:
 
             return False
+    
+
+    def item_path_exists_in_tree(self, item_path):
+
+        try:
+            if self._get_item_by_path(path=item_path):
+                return True
+            else:
+                return False
+        except TimeoutException:
+            return False
+
+
+
+
+    def path_exists_in_tree(self, item_path: str, wait_timeout: int = 2):
+        try:
+            return self._get_item_by_path(path=item_path, wait_timeout=wait_timeout).find()
+        except TimeoutException:
+            return False
+
+
+
+    def _get_children(self, parent_item_path):
+        
+        self.expand_item_by_path(parent_item_path)
+        items = []
+        try:
+            items = ComponentPiece(
+                locator=(By.CSS_SELECTOR, f'div[data-item-path="{parent_item_path}"] > div[data-item-path]'),
+                driver=self.driver,
+                parent_locator_list=None,
+                wait_timeout=1,
+                poll_freq=self.poll_freq).find_all()
+        except TimeoutException:
+            items = []
+
+        return items
 
 
 
@@ -105,11 +189,20 @@ class ProgressiveTree(Tree):
         else:
             item_path = str(item_list[0])
 
-        if self._item_path_exists_in_tree(item_path):
+        if self.item_path_exists_in_tree(item_path):
 
             if not self.item_is_expanded_by_path(item_path):
-                item = self._get_item_by_path(item_path)
-                item.click()
+
+                tree_item = self._get_item_by_path(item_path)
+
+                label = ComponentPiece(
+                        locator=self._LABEL_LOCATOR,
+                        driver=self.driver,
+                        parent_locator_list=tree_item.locator_list,
+                        poll_freq=self.poll_freq)
+
+                label.click()
+
                 time.sleep(self._RESPONCE_TIME)
 
             if len(item_list) > 1:
@@ -124,12 +217,7 @@ class ProgressiveTree(Tree):
 
 
     
-    def _item_path_exists_in_tree(self, item_path):
 
-        try:
-            return self._get_item_by_path(path=item_path)
-        except TimeoutException:
-            return False
 
 
 
