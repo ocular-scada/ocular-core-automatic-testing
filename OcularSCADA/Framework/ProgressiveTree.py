@@ -45,10 +45,12 @@ class ProgressiveTree(Tree):
 
     def get_item_label_by_path(self, item_path):
 
-        item_list = list(map(int, item_path.split('/')))
+        item_list = []
 
         if len(item_list) > 1:
+            item_list = list(map(int, item_path.split('/')))
             self._expand_item_by_path("", item_list[:-1])
+        
 
         tree_item = self._get_item_by_path(item_path)
         tree_item_label = tree_item.find().get_attribute(name="data-label")
@@ -79,8 +81,9 @@ class ProgressiveTree(Tree):
 
     def expand_item_by_path(self, item_path):
 
-        item_list = list(map(int, item_path.split('/')))
-        self._expand_item_by_path("", item_list)
+        if item_path:
+            item_list = list(map(int, item_path.split('/')))
+            self._expand_item_by_path("", item_list)
 
 
 
@@ -102,6 +105,21 @@ class ProgressiveTree(Tree):
                 return True
         
         return False
+    
+    def child_order(self, parent_item_path, name):
+        children = self._get_children(parent_item_path)
+
+        children_names = [child.get_attribute("data-label") for child in children]
+
+        index = -1
+        try:
+            index = children_names.index(name)
+        except:
+            index = -1
+
+        return index
+
+
 
 
 
@@ -125,7 +143,6 @@ class ProgressiveTree(Tree):
             return self._get_item_by_path(
                 path=item_path, wait_timeout=wait_timeout).find().get_attribute(name="data-label") == item_label
         except TimeoutException:
-
             return False
     
 
@@ -155,12 +172,21 @@ class ProgressiveTree(Tree):
         self.expand_item_by_path(parent_item_path)
         items = []
         try:
-            items = ComponentPiece(
-                locator=(By.CSS_SELECTOR, f'div[data-item-path="{parent_item_path}"] > div[data-item-path]'),
-                driver=self.driver,
-                parent_locator_list=None,
-                wait_timeout=1,
-                poll_freq=self.poll_freq).find_all()
+            if parent_item_path:
+                items = ComponentPiece(
+                    locator=(By.CSS_SELECTOR, f'div[data-item-path="{parent_item_path}"] > div[data-item-path]'),
+                    driver=self.driver,
+                    parent_locator_list=None,
+                    wait_timeout=1,
+                    poll_freq=self.poll_freq).find_all()
+            else:
+                # root items
+                items = ComponentPiece(
+                    locator=(By.CSS_SELECTOR, f'.tree > .node-wrapper > div[data-item-path]'),
+                    driver=self.driver,
+                    parent_locator_list=None,
+                    wait_timeout=1,
+                    poll_freq=self.poll_freq).find_all()
         except TimeoutException:
             items = []
 

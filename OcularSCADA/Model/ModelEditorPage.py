@@ -34,7 +34,7 @@ class ModelEditorPage(OcularPage):
 
 
 
-    def clickModelEditorTab(self):
+    def clickAssetEditorTab(self):
         super().select_tab_by_label("Model Editor")
 
     def clickTypeEditorTab(self):
@@ -48,8 +48,6 @@ class ModelEditorPage(OcularPage):
         assert(self.tree_editor.tree.item_path_exists_in_tree(parent_item_path))
 
         if parent_item_path:
-            print(f"Selecting parent_item_path {parent_item_path}")
-            time.sleep(.5)
             self.tree_editor.tree.select_item_by_path(parent_item_path)
             time.sleep(.5)
         
