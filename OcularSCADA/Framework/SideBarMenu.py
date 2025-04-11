@@ -9,7 +9,8 @@ from Components.BasicComponent import BasicPerspectiveComponent
 
 class SideBarMenu(BasicPerspectiveComponent):
 
- 
+    _RESPONCE_TIME = 0.8
+
     def __init__(
             self,
             locator: Tuple[By, str],
@@ -29,4 +30,4 @@ class SideBarMenu(BasicPerspectiveComponent):
     def select_menu_item_by_target(self, target):
         menu_item = self.driver.find_element(By.ID, "menu-item__" + target)
         menu_item.click()
-        time.sleep(2)
+        time.sleep(self._RESPONCE_TIME)

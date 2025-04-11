@@ -8,7 +8,10 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from Components.BasicComponent import BasicPerspectiveComponent
 
 
+
 class TabMenuHorizontal(BasicPerspectiveComponent):
+
+    _RESPONCE_TIME = 0.4
 
     def __init__(
             self,
@@ -29,6 +32,6 @@ class TabMenuHorizontal(BasicPerspectiveComponent):
     def select_tab_by_label(self, label):
         tab_item = self.driver.find_element(By.ID, "tab-item__" + label)
         tab_item.click()
-        time.sleep(1)
+        time.sleep(self._RESPONCE_TIME)
 
 

@@ -54,5 +54,5 @@ class FormItem(BasicPerspectiveComponent):
             form_item = Dropdown(locator=self._locator, driver=self.driver)
             form_item.select_option_by_text_if_not_selected(value)
         elif data_component == 'ia.input.checkbox':
-            form_item = Checkbox(locator=self.locator, driver=self.driver)
+            form_item = Checkbox(locator=self._locator, driver=self.driver)
             form_item.set_state(value)

@@ -11,7 +11,7 @@ from OcularSCADA.Framework.IconButton import IconButton
 
 class ModelEditorTree(BasicPerspectiveComponent):
 
-    _RESPONCE_TIME = 0.6
+    _RESPONCE_TIME = 0.4
 
 
     def __init__(

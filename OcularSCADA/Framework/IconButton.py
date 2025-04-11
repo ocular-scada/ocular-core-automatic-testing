@@ -13,7 +13,7 @@ from Components.BasicComponent import BasicPerspectiveComponent
 
 class IconButton(BasicPerspectiveComponent):
 
-    _RESPONCE_TIME = 0.6
+    _RESPONCE_TIME = 0.4
     _CSS_CLASS_NAME = "psc-os-controlIcon"
 
     def __init__(

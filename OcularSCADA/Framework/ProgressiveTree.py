@@ -13,7 +13,7 @@ from Components.PerspectiveComponents.Displays.Tree import Tree
 
 class ProgressiveTree(Tree):
 
-    _RESPONCE_TIME = 0.6
+    _RESPONCE_TIME = 0.4
 
     def __init__(self, locator, driver):
         Tree.__init__(self, locator=locator, driver=driver)
