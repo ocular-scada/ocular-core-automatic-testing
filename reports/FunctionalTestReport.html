@@ -11,9 +11,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="text-capitalize">UI Functional Tests</h2>
-                <p class='attribute'><strong>Start Time: </strong>2025-04-11 08:11:06</p>
-                <p class='attribute'><strong>Duration: </strong>92.84 s</p>
-                <p class='attribute'><strong>Summary: </strong>Total: 2, Pass: 2</p>
+                <p class='attribute'><strong>Start Time: </strong>2025-04-29 18:12:45</p>
+                <p class='attribute'><strong>Duration: </strong>9.33 s</p>
+                <p class='attribute'><strong>Summary: </strong>Total: 2, Pass: 0, Error: 2</p>
             </div>
         </div>
         <div class="row">
@@ -27,17 +27,84 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class='success'>
+                        <tr class='warning'>
                             <td class="col-xs-10">test_add</td>
                             <td class="col-xs-1">
-                                <span class="label label-success" style="display:block;width:40px;">Pass</span>
+                                <span class="label label-warning" style="display:block;width:40px;">Error</span>
                             </td>
                             <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p style="color:maroon;">NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="menu-item_model"]"}
+  (Session info: chrome=135.0.7049.114); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x562457ea175a <unknown>
+#1 0x5624579544b0 <unknown>
+#2 0x5624579a59b3 <unknown>
+#3 0x5624579a5ba1 <unknown>
+#4 0x5624579f41f4 <unknown>
+#5 0x5624579cb5bd <unknown>
+#6 0x5624579f15e0 <unknown>
+#7 0x5624579cb363 <unknown>
+#8 0x562457997d63 <unknown>
+#9 0x5624579989c1 <unknown>
+#10 0x562457e66a6b <unknown>
+#11 0x562457e6a951 <unknown>
+#12 0x562457e4eb62 <unknown>
+#13 0x562457e6b4c4 <unknown>
+#14 0x562457e3313f <unknown>
+#15 0x562457e8f6f8 <unknown>
+#16 0x562457e8f8d6 <unknown>
+#17 0x562457ea05a6 <unknown>
+#18 0x7d45bd09caa4 <unknown>
+#19 0x7d45bd129c3c <unknown>
+</p><p style="color:maroon;">Traceback (most recent call last):
+  File "/home/nate/repos/ocular-scada-automation-testing/Tests/ModelTests.py", line 58, in setUp
+    self.model_editor.open_menu_item("model")
+  File "/home/nate/repos/ocular-scada-automation-testing/OcularSCADA/Framework/OcularPage.py", line 21, in open_menu_item
+    self.side_bar_menu.select_menu_item_by_target(target)
+  File "/home/nate/repos/ocular-scada-automation-testing/OcularSCADA/Framework/SideBarMenu.py", line 31, in select_menu_item_by_target
+    menu_item = self.driver.find_element(By.ID, "menu-item_" + target.replace("/","_"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nate/repos/ocular-scada-automation-testing/.venv/lib/python3.12/site-packages/selenium/webdriver/remote/webdriver.py", line 898, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nate/repos/ocular-scada-automation-testing/.venv/lib/python3.12/site-packages/selenium/webdriver/remote/webdriver.py", line 429, in execute
+    self.error_handler.check_response(response)
+  File "/home/nate/repos/ocular-scada-automation-testing/.venv/lib/python3.12/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="menu-item_model"]"}
+  (Session info: chrome=135.0.7049.114); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x562457ea175a <unknown>
+#1 0x5624579544b0 <unknown>
+#2 0x5624579a59b3 <unknown>
+#3 0x5624579a5ba1 <unknown>
+#4 0x5624579f41f4 <unknown>
+#5 0x5624579cb5bd <unknown>
+#6 0x5624579f15e0 <unknown>
+#7 0x5624579cb363 <unknown>
+#8 0x562457997d63 <unknown>
+#9 0x5624579989c1 <unknown>
+#10 0x562457e66a6b <unknown>
+#11 0x562457e6a951 <unknown>
+#12 0x562457e4eb62 <unknown>
+#13 0x562457e6b4c4 <unknown>
+#14 0x562457e3313f <unknown>
+#15 0x562457e8f6f8 <unknown>
+#16 0x562457e8f8d6 <unknown>
+#17 0x562457ea05a6 <unknown>
+#18 0x7d45bd09caa4 <unknown>
+#19 0x7d45bd129c3c <unknown>
+
+</p>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Total: 1, Pass: 1 -- Duration: 44.27 s
+                                Total: 1, Pass: 0, Error: 1 -- Duration: 4.71 s
                             </td>
                         </tr>
                     </tbody>
@@ -55,17 +122,84 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class='success'>
+                        <tr class='warning'>
                             <td class="col-xs-10">test_add</td>
                             <td class="col-xs-1">
-                                <span class="label label-success" style="display:block;width:40px;">Pass</span>
+                                <span class="label label-warning" style="display:block;width:40px;">Error</span>
                             </td>
                             <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p style="color:maroon;">NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="menu-item_model"]"}
+  (Session info: chrome=135.0.7049.114); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x62ce23cd675a <unknown>
+#1 0x62ce237894b0 <unknown>
+#2 0x62ce237da9b3 <unknown>
+#3 0x62ce237daba1 <unknown>
+#4 0x62ce238291f4 <unknown>
+#5 0x62ce238005bd <unknown>
+#6 0x62ce238265e0 <unknown>
+#7 0x62ce23800363 <unknown>
+#8 0x62ce237ccd63 <unknown>
+#9 0x62ce237cd9c1 <unknown>
+#10 0x62ce23c9ba6b <unknown>
+#11 0x62ce23c9f951 <unknown>
+#12 0x62ce23c83b62 <unknown>
+#13 0x62ce23ca04c4 <unknown>
+#14 0x62ce23c6813f <unknown>
+#15 0x62ce23cc46f8 <unknown>
+#16 0x62ce23cc48d6 <unknown>
+#17 0x62ce23cd55a6 <unknown>
+#18 0x7d3624c9caa4 <unknown>
+#19 0x7d3624d29c3c <unknown>
+</p><p style="color:maroon;">Traceback (most recent call last):
+  File "/home/nate/repos/ocular-scada-automation-testing/Tests/ModelTests.py", line 99, in setUp
+    self.model_editor.open_menu_item("model")
+  File "/home/nate/repos/ocular-scada-automation-testing/OcularSCADA/Framework/OcularPage.py", line 21, in open_menu_item
+    self.side_bar_menu.select_menu_item_by_target(target)
+  File "/home/nate/repos/ocular-scada-automation-testing/OcularSCADA/Framework/SideBarMenu.py", line 31, in select_menu_item_by_target
+    menu_item = self.driver.find_element(By.ID, "menu-item_" + target.replace("/","_"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nate/repos/ocular-scada-automation-testing/.venv/lib/python3.12/site-packages/selenium/webdriver/remote/webdriver.py", line 898, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nate/repos/ocular-scada-automation-testing/.venv/lib/python3.12/site-packages/selenium/webdriver/remote/webdriver.py", line 429, in execute
+    self.error_handler.check_response(response)
+  File "/home/nate/repos/ocular-scada-automation-testing/.venv/lib/python3.12/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="menu-item_model"]"}
+  (Session info: chrome=135.0.7049.114); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x62ce23cd675a <unknown>
+#1 0x62ce237894b0 <unknown>
+#2 0x62ce237da9b3 <unknown>
+#3 0x62ce237daba1 <unknown>
+#4 0x62ce238291f4 <unknown>
+#5 0x62ce238005bd <unknown>
+#6 0x62ce238265e0 <unknown>
+#7 0x62ce23800363 <unknown>
+#8 0x62ce237ccd63 <unknown>
+#9 0x62ce237cd9c1 <unknown>
+#10 0x62ce23c9ba6b <unknown>
+#11 0x62ce23c9f951 <unknown>
+#12 0x62ce23c83b62 <unknown>
+#13 0x62ce23ca04c4 <unknown>
+#14 0x62ce23c6813f <unknown>
+#15 0x62ce23cc46f8 <unknown>
+#16 0x62ce23cc48d6 <unknown>
+#17 0x62ce23cd55a6 <unknown>
+#18 0x7d3624c9caa4 <unknown>
+#19 0x7d3624d29c3c <unknown>
+
+</p>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Total: 1, Pass: 1 -- Duration: 48.57 s
+                                Total: 1, Pass: 0, Error: 1 -- Duration: 4.62 s
                             </td>
                         </tr>
                     </tbody>

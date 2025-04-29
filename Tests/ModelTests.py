@@ -55,7 +55,7 @@ class TestAssetModel(HierarchicalModel):
 
         self.driver = Tests.util.open_browser()
         self.model_editor = ModelEditorPage(self.driver, '', '')
-        self.model_editor.open_menu_item("model")
+        self.model_editor.open_menu_item("/dash-layout/model")
         self.model_editor.clickAssetEditorTab()
 		
     def tearDown(self):
@@ -96,7 +96,7 @@ class TestTypeModel(HierarchicalModel):
 
         self.driver = Tests.util.open_browser()
         self.model_editor = ModelEditorPage(self.driver, '', '')
-        self.model_editor.open_menu_item("model")
+        self.model_editor.open_menu_item("/dash-layout/model")
         self.model_editor.clickTypeEditorTab()
 		
     def tearDown(self):

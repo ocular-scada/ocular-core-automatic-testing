@@ -5,7 +5,7 @@ GATEWAY_PORT = "8088"
 
 # Projects
 API_PROJECT_NAME = 'ocular-test-api'
-TEST_PROJECT_NAME = 'ocular-water-demo'
+TEST_PROJECT_NAME = 'ocular-layout-demo'
 
 
 

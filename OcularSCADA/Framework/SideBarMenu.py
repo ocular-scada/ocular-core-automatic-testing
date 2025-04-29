@@ -28,6 +28,6 @@ class SideBarMenu(BasicPerspectiveComponent):
             poll_freq=poll_freq)
 
     def select_menu_item_by_target(self, target):
-        menu_item = self.driver.find_element(By.ID, "menu-item__" + target)
+        menu_item = self.driver.find_element(By.ID, "menu-item_" + target.replace("/","_"))
         menu_item.click()
         time.sleep(self._RESPONCE_TIME)
