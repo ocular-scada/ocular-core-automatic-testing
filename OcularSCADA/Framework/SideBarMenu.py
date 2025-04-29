@@ -3,7 +3,7 @@ from typing import Union, List, Optional, Tuple
 
 
 from selenium.webdriver.common.by import By # type: ignore
-from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver # type: ignore
 
 from Components.BasicComponent import BasicPerspectiveComponent
 

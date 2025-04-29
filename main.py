@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By # type: ignore
 import unittest
 import time
-import HtmlTestRunner
+import HtmlTestRunner # type: ignore
 
 import OcularSCADA.API
 import Tests.util
